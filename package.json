@@ -64,6 +64,7 @@
     "@types/node": "~6.0.60",
     "codelyzer": "^4.0.1",
     "commitizen": "^2.10.1",
+    "dotenv": "^6.0.0",
     "foreman": "^3.0.1",
     "git-cz": "^1.7.1",
     "jasmine-core": "~2.8.0",
