@@ -5,6 +5,10 @@ const compression = require('compression');
 const cors = require('cors');
 const r6 = require('r6api');
 
+if (process.env.NODE_ENV !== 'prod') {
+  require('dotenv').config({path: __dirname + '/.env'})
+}
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -39,8 +43,8 @@ app.get('/api', (req, res) => {
 });
 
 async function login() {
-  r6.auth.setCredentials('rainbow6me.api@gmail.com', 'hiANDOrplasE');
-  await r6.auth.login('rainbow6me.api@gmail.com', 'hiANDOrplasE');
+  r6.auth.setCredentials(process.env.UBI_EMAIL, process.env.UBI_PASSWORD);
+  await r6.auth.login(process.env.UBI_EMAIL, process.env.UBI_PASSWORD);
 }
 
 app.get('/api/player/:name/details', async (req, res) => {
