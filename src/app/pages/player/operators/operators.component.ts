@@ -17,7 +17,7 @@ export class OperatorsComponent implements OnInit {
     console.log('ops', this.operators);
     Object.getOwnPropertyNames(this.operators).forEach((name) => {
       this.operators[name].kdRatio = ((this.operators[name].kills || 0) / (this.operators[name].deaths || 1));
-
+      this.operators[name].wlRatio = (((this.operators[name].won || 0) / ((this.operators[name].lost + this.operators[name].won) || 1))) * 100;
     });
     this.operatorsArray = Object.values(this.operators);
     this.sortBy('timePlayed');

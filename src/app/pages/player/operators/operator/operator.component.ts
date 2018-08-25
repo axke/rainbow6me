@@ -7,6 +7,8 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class OperatorComponent implements OnInit {
   @Input() operator: any;
+  attackers = ['ash', 'twitch', 'dokkaebi', 'hibana', 'glaz', 'iq', 'blitz', 'ting', 'zofia',
+    'blackbeard', 'sledge', 'thatcher', 'montagne', 'fuze', 'lion', 'buck', 'capitao', 'thermite', 'jackal', 'finka', 'maverick']
   constructor() { }
 
   ngOnInit() {
@@ -38,9 +40,9 @@ export class OperatorComponent implements OnInit {
         // this.operator.name = 'FBI Recruit'
         break;
       default:
-        console.log(this.operator.name.toLowerCase());
         this.operator.strippedName = this.operator.name.toLowerCase();
     }
+    this.operator.type = this.attackers.includes(this.operator.strippedName) ? 'Attack' : 'Defense';
   }
 
 }
