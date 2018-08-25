@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~bootswatch/dist/darkly/variables';
+@import '~bootstrap/scss/bootstrap';
+@import '~bootswatch/dist/darkly/bootswatch';
+.card {
+  .card-header {
+    background-color: $gray-800;
+    span {
+      font-size: 1.3rem;
+      display: inline-block;
+    }
+  }
+}
+.player-stats-general {
+  .stat {
+    padding-bottom: .5rem;
+    span {
+      display: block;
+      font-size: 1.25rem;
+    }
+    small {
+      color: $gray-600;
+    }
+  }
+}

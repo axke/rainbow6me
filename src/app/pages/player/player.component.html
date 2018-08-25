@@ -1,0 +1,5 @@
+<app-player-header *ngIf="player" [player]="player" (refresh)="load($event)"></app-player-header>
+<div class="container-fluid">
+  <app-player-stats *ngIf="player && tab && tab.toLowerCase() === 'summary'" [player]="player" [seasons]="seasons"></app-player-stats>
+  <app-player-operators *ngIf="player && player.stats && player.stats.operator && tab && tab.toLowerCase() === 'operators'" [operators]="player.stats.operator"></app-player-operators>
+</div>
