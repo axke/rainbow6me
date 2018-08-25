@@ -12,7 +12,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "commit": "ng lint && git add && git-cz",
+    "commit": "ng lint && git add --all && git-cz",
     "heroku-postbuild": "npm install && npm run build"
   },
   "private": true,
