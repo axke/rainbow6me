@@ -19,8 +19,13 @@
              routerLinkActive="active">Operators</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-warning" href="javascript:void(0)" (click)="refreshPlayer()">
+          <a class="nav-link text-muted" href="javascript:void(0)" (click)="refreshPlayer()">
             <fa-icon [icon]="faSync"></fa-icon>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-muted" href="javascript:void(0)" [routerLink]="['/search']">
+            <fa-icon [icon]="faSearch"></fa-icon>
           </a>
         </li>
       </ul>

@@ -52,8 +52,16 @@ app.get('/api/player/:name/details', async (req, res) => {
   let platform = 'PC';
 
   await login();
+  let users = await r6.api.findByName(platform, name);
 
-  return await r6.api.findByName(platform, name)
+  users.forEach((user) => {
+    user.platform = platform;
+    user.imageURL = platform !== 'PC'
+      ? `//ubisoft-avatars.akamaized.net/${user.id}/default_146_146.png`
+      : `//uplay-avatars.s3.amazonaws.com/${user.id}/default_146_146.png`
+  });
+
+  return res.send(users);
 });
 
 app.get('/api/player/:id', async (req, res) => {

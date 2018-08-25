@@ -23,6 +23,8 @@ import { PastRanksComponent } from './pages/player/stats/past-ranks/past-ranks.c
 import { SeasonRankComponent } from './pages/player/stats/rank/season-rank/season-rank.component';
 import { OperatorComponent } from './pages/player/operators/operator/operator.component';
 import { NameFilterPipe } from './shared/pipes/name-filter.pipe';
+import { SearchComponent } from './pages/search/search.component';
+import { ResultsComponent } from './pages/search/results/results.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { NameFilterPipe } from './shared/pipes/name-filter.pipe';
     PastRanksComponent,
     SeasonRankComponent,
     OperatorComponent,
-    NameFilterPipe
+    NameFilterPipe,
+    SearchComponent,
+    ResultsComponent
   ],
   imports: [
     BrowserModule,

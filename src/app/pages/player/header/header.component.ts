@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {faSync} from '@fortawesome/free-solid-svg-icons';
+import {faSync, faSearch} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-player-header',
@@ -10,6 +10,7 @@ export class HeaderComponent implements OnInit {
   @Input() player: any;
   @Output() refresh: EventEmitter<boolean> = new EventEmitter<boolean>();
   faSync = faSync;
+  faSearch = faSearch;
   constructor() { }
 
   ngOnInit() {
