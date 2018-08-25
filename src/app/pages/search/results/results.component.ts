@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ApiService} from '../../../shared/services/api.service';
 
@@ -7,9 +7,10 @@ import {ApiService} from '../../../shared/services/api.service';
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.scss']
 })
-export class ResultsComponent implements OnInit {
+export class ResultsComponent implements OnInit, OnDestroy {
   users: any[];
   name: string;
+  sub: any;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -17,17 +18,22 @@ export class ResultsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.name = this.route.snapshot.paramMap.get('name');
-    this.apiService.getUserByName(this.name).subscribe(
-      (users) => {
-        this.users = users;
-      },
-      error => console.error('ERROR:', error)
-    );
+    this.sub = this.route.params.subscribe(params => {
+      this.name = params['name'];
+      this.apiService.getUserByName(this.name).subscribe(
+        (users) => {
+          this.users = users;
+        },
+        error => console.error('ERROR:', error)
+      );
+    });
   }
 
   search(value: string) {
     this.router.navigate(['/search', value]);
   }
 
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
 }

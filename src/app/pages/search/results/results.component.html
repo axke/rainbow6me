@@ -3,7 +3,7 @@
     <div class="col-sm-6 mx-auto">
       <div class="input-group mb-3">
         <input #user type="text" class="form-control border-secondary form-control-lg bg-secondary text-white"
-               placeholder="Search for a player..." [value]="name">
+               placeholder="Search for a player..." [value]="name" (keyup.enter)="search(user.value)">
         <div class="input-group-append">
           <button class="btn btn-lg btn-primary" (click)="search(user.value)">Search</button>
         </div>
