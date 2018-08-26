@@ -24,4 +24,4 @@ export class ApiService {
   getPlayersData(csv: string): Observable<any> {
     return this.http.get<any>(`${environment.baseApi}/players/${csv}`);
   }
-
+}
