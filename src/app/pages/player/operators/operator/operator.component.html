@@ -30,11 +30,11 @@
           <span class="d-block text-uppercase text-muted">Losses</span>
         </div>
         <div class="col">
-          <span class="d-block stat" [innerHTML]="(operator.wlRatio).toFixed(2) > 0 ? (operator.wlRatio).toFixed(2)+'%' : 0 +'%'"></span>
+          <span class="d-block stat" [innerHTML]="(operator.wlRatio).toFixed(2)+'%' || 0 +'%'"></span>
           <span class="d-block text-uppercase text-muted">Win %</span>
         </div>
         <div class="col">
-          <span class="d-block stat" [innerHTML]="(operator.timePlayed / 60 / 60).toFixed(2) > 0 ? (operator.timePlayed / 60 / 60).toFixed(2) : 0"></span>
+          <span class="d-block stat" [innerHTML]="(operator.timePlayed / 60 / 60).toFixed(2) || 0"></span>
           <span class="d-block text-uppercase text-muted">Hours</span>
         </div>
       </div>
