@@ -33,13 +33,18 @@ export class PlayerComponent implements OnInit, OnDestroy {
       console.log('run load');
       this.api.getPlayer(this.id).subscribe((player) => {
         this.player = player;
-        console.log('player', this.player);
+        this.loadLive();
       }, err => console.error('ERROR:', err));
 
       this.api.getPlayerSeasonRanks(this.id).subscribe((seasons) => {
         this.seasons = seasons;
-        console.log('seasons', this.seasons);
       }, err => console.error('ERROR:', err));
+    }
+  }
+
+  loadLive() {
+    if (this.tab === 'live') {
+
     }
   }
 

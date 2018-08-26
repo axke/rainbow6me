@@ -1,16 +1,16 @@
 <div class="container">
-  <div class="row mt-3">
+  <div class="row mt-4">
     <div class="col-sm-4">
       <div>
         <app-player-rank [rank]="player.rank" region="ncsa"></app-player-rank>
       </div>
-      <div class="mt-3">
+      <div class="mt-4">
         <app-previous-ranks [seasons]="seasons" region="ncsa"></app-previous-ranks>
       </div>
     </div>
     <div class="col-sm-8">
       <app-player-general [generalStats]="player.stats.general"></app-player-general>
-      <div class="row mt-3">
+      <div class="row mt-4">
         <div class="col-sm-6">
           <app-player-queue queueName="Casual" [queue]="player.stats.queue.casual"></app-player-queue>
         </div>

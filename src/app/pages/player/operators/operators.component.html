@@ -32,7 +32,7 @@
     </div>
   </div>
 
-  <div *ngFor="let operator of operatorsArray | nameFilter: filter">
+  <div *ngFor="let operator of operatorsArray | filterByName: filter">
     <app-player-operator [operator]="operator"></app-player-operator>
   </div>
 </div>

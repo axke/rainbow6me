@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {ApiService} from '../../shared/services/api.service';
 
@@ -10,11 +10,15 @@ import {ApiService} from '../../shared/services/api.service';
     ApiService
   ]
 })
-export class SearchComponent implements OnInit {
-
+export class SearchComponent implements OnInit, AfterViewInit {
+  @ViewChild('user') private elementRef: ElementRef;
   constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  public ngAfterViewInit(): void {
+    this.elementRef.nativeElement.focus();
   }
 
   search(value: string) {

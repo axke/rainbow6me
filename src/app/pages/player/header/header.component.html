@@ -1,6 +1,6 @@
 <div class="player-header pb-3 pt-3 mb-5">
   <div class="container">
-    <img class="rounded d-inline-block mr-5" [src]="player.user.imageURL"/>
+    <img class="rounded d-inline-block mr-5" height="146" width="146" [src]="player.user.imageURL" alt="Profile Avatar" />
     <div class="player-header-info d-inline-block">
       <h3 class="player-header-name-wrapper">
         <span class="player-header-name" [innerHTML]="player.user.name"></span>
@@ -19,13 +19,19 @@
              routerLinkActive="active">Operators</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link text-muted" href="javascript:void(0)" [routerLink]="['/player', player.user.id.toLowerCase(), 'live']"
+             routerLinkActive="active">
+            <fa-icon [icon]="chartIcon"></fa-icon>
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link text-muted" href="javascript:void(0)" (click)="refreshPlayer()">
-            <fa-icon [icon]="faSync"></fa-icon>
+            <fa-icon [icon]="refreshIcon"></fa-icon>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-muted" href="javascript:void(0)" [routerLink]="['/search']">
-            <fa-icon [icon]="faSearch"></fa-icon>
+            <fa-icon [icon]="searchIcon"></fa-icon>
           </a>
         </li>
       </ul>

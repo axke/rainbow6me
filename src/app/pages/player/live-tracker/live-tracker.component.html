@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      DEV BUTTONS <br/>
+      <button class="btn btn-outline-primary" (click)="createTracker()">Create Tracker</button>
+      <button class="btn btn-outline-primary" (click)="updateTracker()">Update Tracker</button>
+      <button class="btn btn-outline-primary" (click)="deleteTracker()">Delete Tracker</button>
+      <button class="btn btn-outline-primary" (click)="getTotals()">Get Totals</button>
+      <button class="btn btn-outline-primary" (click)="logTracker()">Log Tracker</button>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-4">
+      <div class="search mb-2">
+        <div class="input-group">
+          <input #user type="text" class="form-control border-secondary form-control- bg-secondary text-white"
+                 placeholder="Add a player to session" (keyup.enter)="search(user.value)"/>
+          <div class="input-group-append">
+            <button class="btn btn-primary" (click)="search(user.value)">Add</button>
+          </div>
+        </div>
+        <small class="text-muted" *ngIf="notFound">No user found with that name</small>
+      </div>
+      <div class="card">
+        <ul class="list-group list-group-flush" *ngIf="tracker && tracker.length > 0">
+          <li class="list-group-item media p-2" *ngFor="let tracks of tracker">
+            <div class="row" *ngIf="tracks && tracks.user">
+              <div class="col-3">
+                <img class="mr-3 rounded d-inline-block align-top" [src]="tracks.user.imageURL" style="width: 100%"/>
+              </div>
+              <div class="col-9">
+                <span class="mt-0" [innerHTML]="tracks.user.name"></span>
+                <small class="row mt-1"
+                       *ngIf="tracks.games && tracks.games.length > 0 && tracks.totals && tracks.totals.stats">
+                  <div class="col-6">
+                    <dl class="row tracker-dl">
+                      <dt class="col-6 text-uppercase text-muted">K</dt>
+                      <dl class="col-6" [innerHTML]="tracks.totals.stats.general.kills"></dl>
+                      <dt class="col-6 text-uppercase text-muted">D</dt>
+                      <dl class="col-6" [innerHTML]="tracks.totals.stats.general.deaths"></dl>
+                      <dt class="col-6 text-uppercase text-muted">A</dt>
+                      <dl class="col-6" [innerHTML]="tracks.totals.stats.general.assists"></dl>
+                      <dt class="col-6 text-uppercase text-muted">KDR</dt>
+                      <dl class="col-6"
+                          [innerHTML]="(tracks.totals.stats.general.kills / tracks.totals.stats.general.deaths).toFixed(2)"></dl>
+                    </dl>
+                  </div>
+                  <div class="col-6">
+                    <dl class="row tracker-dl">
+                      <dt class="col-6 text-uppercase text-muted">W</dt>
+                      <dl class="col-6" [innerHTML]="tracks.totals.stats.general.won"></dl>
+                      <dt class="col-6 text-uppercase text-muted">L</dt>
+                      <dl class="col-6" [innerHTML]="tracks.totals.stats.general.lost"></dl>
+                      <dt class="col-6 text-uppercase text-muted">W%</dt>
+                      <dl class="col-6"
+                          [innerHTML]="((tracks.totals.stats.general.won / tracks.totals.stats.general.played) * 100).toFixed(2)"></dl>
+                    </dl>
+                  </div>
+                </small>
+                <small class="text-muted d-block align-bottom" *ngIf="tracks.games && tracks.games.length <= 0">No games
+                  played during
+                  this session
+                </small>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-8">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="text-muted text-center">{{chartStat.charAt(0).toUpperCase() + chartStat.substr(1)}} per game</h4>
+          <canvas *ngIf="chartData && chartData.length > 0"
+                  baseChart="'lineChart"
+                  [datasets]="chartData"
+                  [labels]="chartLabels"
+                  [options]="chartOptions"
+                  [legend]="chartLegend"
+                  [chartType]="chartType"
+                  [colors]="chartColors"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)">
+          </canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

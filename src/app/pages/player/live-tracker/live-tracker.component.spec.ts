@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PastRanksComponent } from './past-ranks.component';
+import { LiveTrackerComponent } from './live-tracker.component';
 
-describe('PastRanksComponent', () => {
-  let component: PastRanksComponent;
-  let fixture: ComponentFixture<PastRanksComponent>;
+describe('LiveTrackerComponent', () => {
+  let component: LiveTrackerComponent;
+  let fixture: ComponentFixture<LiveTrackerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PastRanksComponent ]
+      declarations: [ LiveTrackerComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PastRanksComponent);
+    fixture = TestBed.createComponent(LiveTrackerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

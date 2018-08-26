@@ -64,6 +64,39 @@ app.get('/api/player/:name/details', async (req, res) => {
   return res.send(users);
 });
 
+app.get('/api/players/:ids', async (req, res) => {
+  let ids = req.params.ids;
+  console.log(ids);
+  let platform = 'PC';
+
+  await login();
+
+  const promises = [];
+  promises.push(
+    {user: await r6.api.getCurrentName(platform, ids)}
+  );
+  promises.push(
+    {stats: await r6.api.getStats(platform, ids)}
+  );
+  promises.push(
+    {level: await r6.api.getLevel(platform, ids)}
+  );
+  promises.push(
+    {rank: await r6.api.getRanks(platform, ids)}
+  );
+
+  Promise.all(promises).then((raw) => {
+    let flat = Object.assign(...raw);
+    flat.user.forEach((u) => {
+      u.platform = platform;
+      u.imageURL = platform !== 'PC'
+        ? `//ubisoft-avatars.akamaized.net/${u.id}/default_146_146.png`
+        : `//uplay-avatars.s3.amazonaws.com/${u.id}/default_146_146.png`
+    });
+    return res.send(flat);
+  });
+});
+
 app.get('/api/player/:id', async (req, res) => {
   let id = req.params.id;
   let platform = 'PC';

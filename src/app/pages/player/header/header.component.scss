@@ -24,6 +24,10 @@
       letter-spacing: .5em;
       text-transform: uppercase;
       font-weight: bolder;
+      border-bottom: 1px solid $secondary;
+      margin-right: .25rem;
+      &:hover {
+      }
       &.active {
         border-bottom: 1px solid $primary;
         color: $primary !important;

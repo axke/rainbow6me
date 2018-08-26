@@ -3,6 +3,7 @@ import {NgModule} from '@angular/core';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import { ChartsModule } from 'ng2-charts';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -10,7 +11,6 @@ import {PlayerComponent} from './pages/player/player.component';
 import {HeaderComponent} from './pages/player/header/header.component';
 import {StatsComponent} from './pages/player/stats/stats.component';
 import {OperatorsComponent} from './pages/player/operators/operators.component';
-import {RanksComponent} from './pages/player/ranks/ranks.component';
 import {HomeComponent} from './pages/home/home.component';
 import {ApiService} from './shared/services/api.service';
 import {HttpClientModule} from '@angular/common/http';
@@ -18,13 +18,14 @@ import { RankComponent } from './pages/player/stats/rank/rank.component';
 import { PreviousRanksComponent } from './pages/player/stats/previous-ranks/previous-ranks.component';
 import { GeneralComponent } from './pages/player/stats/general/general.component';
 import { QueueComponent } from './pages/player/stats/queue/queue.component';
-import { ModesComponent } from './pages/player/stats/modes/modes.component';
-import { PastRanksComponent } from './pages/player/stats/past-ranks/past-ranks.component';
 import { SeasonRankComponent } from './pages/player/stats/rank/season-rank/season-rank.component';
 import { OperatorComponent } from './pages/player/operators/operator/operator.component';
 import { NameFilterPipe } from './shared/pipes/name-filter.pipe';
 import { SearchComponent } from './pages/search/search.component';
 import { ResultsComponent } from './pages/search/results/results.component';
+import { OrderPipe } from './shared/pipes/order.pipe';
+import { LiveTrackerComponent } from './pages/player/live-tracker/live-tracker.component';
+import {LiveTrackerService} from './shared/services/live-tracker.service';
 
 @NgModule({
   declarations: [
@@ -33,28 +34,28 @@ import { ResultsComponent } from './pages/search/results/results.component';
     HeaderComponent,
     StatsComponent,
     OperatorsComponent,
-    RanksComponent,
     HomeComponent,
     RankComponent,
     PreviousRanksComponent,
     GeneralComponent,
     QueueComponent,
-    ModesComponent,
-    PastRanksComponent,
     SeasonRankComponent,
     OperatorComponent,
     NameFilterPipe,
     SearchComponent,
-    ResultsComponent
+    ResultsComponent,
+    OrderPipe,
+    LiveTrackerComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ChartsModule
   ],
-  providers: [ApiService],
+  providers: [ApiService, LiveTrackerService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
