@@ -165,6 +165,7 @@ export class LiveTrackerComponent implements OnInit {
     if (this.chart !== undefined) {
       this.chart.ngOnDestroy();
       this.chart.labels = this.chartLabels;
+      this.chart.data = this.chartData;
       this.chart.chart = this.chart.getChartBuilder(this.chart.ctx);
     }
   }
