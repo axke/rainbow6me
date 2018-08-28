@@ -20,17 +20,17 @@
           <ul class="nav justify-content-center">
             <li class="nav-item">
               <a class="nav-link text-muted" [routerLink]="['/live']">
-                Sessions
+                Trackers
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-muted" href="javascript:void(0)" (click)="updateTracker()">
-                Update
+                <fa-icon [icon]="syncIcon"></fa-icon>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-muted" href="javascript:void(0)" (click)="resetTacker()">
-                Reset
+              <a class="nav-link text-muted" [routerLink]="['/search']">
+                <fa-icon [icon]="homeIcon"></fa-icon>
               </a>
             </li>
           </ul>
@@ -100,29 +100,13 @@
       </div>
     </div>
     <div class="col-8">
-      <!--<div class="card">
-        <div class="card-body">
-          <h4 class="text-muted text-center">{{chartStat.charAt(0).toUpperCase() + chartStat.substr(1)}} per game</h4>
-          <canvas *ngIf="chartData && chartData.length > 0"
-                  baseChart="'lineChart"
-                  [datasets]="chartData"
-                  [labels]="chartLabels"
-                  [options]="chartOptions"
-                  [legend]="chartLegend"
-                  [chartType]="chartType"
-                  [colors]="chartColors"
-                  (chartHover)="chartHovered($event)"
-                  (chartClick)="chartClicked($event)">
-          </canvas>
-        </div>
-      </div>-->
-
       <div class="card" *ngIf="data && data.length > 0">
         <div class="card-body">
           <div class="text-center mb-2">
             <button class="btn btn-sm btn-primary" (click)="switchChartStat('kills')">Show Kills</button>
             <button class="btn btn-sm btn-primary" (click)="switchChartStat('deaths')">Show Deaths</button>
             <button class="btn btn-sm btn-primary" (click)="switchChartStat('assists')">Show Assists</button>
+            <button class="btn btn-sm btn-primary" (click)="switchChartStat('mmr', 'rank')">Show MMR Gain</button>
           </div>
           <h4 class="text-muted text-center">{{chartStat.charAt(0).toUpperCase() + chartStat.substr(1)}} per game</h4>
           <ngx-charts-line-chart

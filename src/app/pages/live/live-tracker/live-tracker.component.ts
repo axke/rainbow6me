@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {LiveTrackerService} from '../../../shared/services/live-tracker.service';
 import {ActivatedRoute} from '@angular/router';
 import {ApiService} from '../../../shared/services/api.service';
-import {BaseChartDirective} from 'ng2-charts';
+import {faSync, faHome} from '@fortawesome/free-solid-svg-icons';
 import {timer} from 'rxjs/observable/timer';
 import {take, map, last} from 'rxjs/operators';
 import * as moment from 'moment';
@@ -19,6 +19,8 @@ export class LiveTrackerComponent implements OnInit {
   tracker: any;
   trackerDetails: any;
   notFound: boolean;
+  syncIcon = faSync;
+  homeIcon = faHome;
   // ngx-charts
   data: any[] = [];
   chartStat = 'kills';
@@ -27,7 +29,8 @@ export class LiveTrackerComponent implements OnInit {
   colorSets: any = colorSets;
   showXAxis = true;
   showYAxis = true;
-  gradient = false;
+  yMin = 0;
+  gradient = true;
   showLegend = true;
   showXAxisLabel = true;
   xAxisLabel = 'Games';
@@ -96,7 +99,7 @@ export class LiveTrackerComponent implements OnInit {
     this.apiService.getPlayersData(playerIds).subscribe((data) => {
       this.tracker = this.liveTrackerService.updateTracker(this.tracker, data, this.id);
       this.getTotals();
-      this.updateChart('kills');
+      this.updateChart(this.chartStat);
       this.count = this.updateInterval;
       this.trackerDetails = this.liveTrackerService.findTrackerDetails(this.id);
     });
@@ -178,7 +181,7 @@ export class LiveTrackerComponent implements OnInit {
     });
   }
 
-  updateChart(stat: string = this.chartStat) {
+  updateChart(stat: string = this.chartStat, statProp = 'general') {
     console.log('updateCharts');
 
     // ngx-charts
@@ -191,16 +194,26 @@ export class LiveTrackerComponent implements OnInit {
         series: []
       };
       tracks.games.forEach((game, i) => {
-        dataPoint.series.push({name: (i + 1).toString(), value: game.stats.general[stat]});
+        let statistic = game.stats.general;
+        switch (statProp) {
+          case 'rank':
+            statistic = game.rank.ncsa;
+            this.yMin = null;
+            break;
+          default:
+            statistic = game.stats.general;
+            this.yMin = 0;
+        }
+        dataPoint.series.push({name: (i + 1).toString(), value: statistic[stat]});
       });
       this.data = [...this.data, dataPoint];
     });
     console.log(this.data);
   }
 
-  switchChartStat(stat: string) {
+  switchChartStat(stat: string, statProp: string = 'general') {
     this.chartStat = stat;
-    this.updateChart(this.chartStat);
+    this.updateChart(this.chartStat, statProp);
   }
 
   public chartClicked(e: any): void {
