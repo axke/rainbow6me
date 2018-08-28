@@ -17,7 +17,7 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(cors());
 app.use(compression());
 
-if (process.env.NODE_ENV === 'prod') {
+if (process.env.NODE_ENV === 'production') {
   // force SSL
   const forceSSL = function () {
     return function (req, res, next) {
