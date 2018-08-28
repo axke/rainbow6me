@@ -1,4 +1,6 @@
 import {Injectable} from '@angular/core';
+import {Guid} from '../utils/guid';
+import * as moment from 'moment';
 
 @Injectable()
 export class LiveTrackerService {
@@ -6,13 +8,57 @@ export class LiveTrackerService {
   constructor() {
   }
 
-  createTracker(id: string, player: any) {
+  createTrackerDetails(details: any): any {
+    const sessionDetails: any[] = JSON.parse(localStorage.getItem('trackerDetails') || '[]');
+    const json: any = {};
+    const id = Guid.newGuid();
+    details.id = id;
+    details.lastUpdate = null;
+    details.timestamp = moment(new Date()).format('MMM do YY');
+    sessionDetails.push(details);
+    localStorage.setItem('trackerDetails', JSON.stringify(sessionDetails));
+    return json;
+  }
+
+  updateTrackerLastUpdate(id: string, updateTime: Date = new Date()): any {
+    const details = this.findTrackerDetails(id);
+    const newDetails = {...details};
+    newDetails.lastUpdate = moment(updateTime).format('LLL');
+    this.deleteTrackerDetails(details);
+    this.addExistingTrackerDetails(newDetails);
+    return details;
+  }
+
+  deleteTrackerDetails(details: any) {
+    const sessionDetails: any[] = JSON.parse(localStorage.getItem('trackerDetails') || '[]');
+    console.log('session details', sessionDetails);
+    for (let i = 0; i < sessionDetails.length; i++) {
+      if (sessionDetails[i].id === details.id) {
+        sessionDetails.splice(i, 1);
+      }
+    }
+    console.log('post delete', sessionDetails);
+    localStorage.setItem('trackerDetails', JSON.stringify(sessionDetails || '[]'));
+  }
+
+  addExistingTrackerDetails(details) {
+    const sessionDetails: any[] = JSON.parse(localStorage.getItem('trackerDetails') || '[]');
+    sessionDetails.push(details);
+    localStorage.setItem('trackerDetails', JSON.stringify(sessionDetails || '[]'));
+  }
+
+  createTracker(id: string, players: any[]) {
     const sessions: any[] = JSON.parse(localStorage.getItem('trackerSessions') || '[]');
     const json: any = {};
-    json[id] = [{'user': player.user, 'history': [player], 'games': [], 'totals': {}}];
+    const data = [];
+    players.forEach((player) => {
+      data.push({'user': player.user, 'history': [player], 'games': [], 'totals': {}});
+    });
+    json[id] = data;
     sessions.push(json);
     localStorage.setItem('trackerSessions', JSON.stringify(sessions));
-    return json;
+    this.updateTrackerLastUpdate(id);
+    return json[id];
   }
 
   addExistingTracker(tracker: any) {
@@ -26,16 +72,6 @@ export class LiveTrackerService {
     const index = sessions.indexOf(tracker);
     sessions.splice(index, 1);
     localStorage.setItem('trackerSessions', JSON.stringify(sessions || '[]'));
-  }
-
-  addPlayerToTracker(id: string, tracker: any[], player: any): any {
-    const old = Object.assign({}, tracker);
-    const track = {'user': player.user, 'history': [player], 'games': [], 'totals': {}};
-    tracker.push(track);
-    const newTracker = {};
-    newTracker[id] = tracker;
-    const post = this.replaceTrackerInSession(old, newTracker, id);
-    return post;
   }
 
   trackerExists(id: string): boolean {
@@ -64,8 +100,29 @@ export class LiveTrackerService {
     return tracker || [];
   }
 
+  findAllTrackers(): any[] {
+    return JSON.parse(localStorage.getItem('trackerSessions') || '[]');
+  }
+
+  findTrackerDetails(id: string) {
+    const details: any[] = JSON.parse(localStorage.getItem('trackerDetails') || '[]');
+    let trackerDetails;
+    details.forEach((d) => {
+      if (d.id === id) {
+        trackerDetails = d;
+      }
+    });
+    return trackerDetails || [];
+  }
+
+  findAllTrackerDetails(): any[] {
+    return JSON.parse(localStorage.getItem('trackerDetails') || '[]');
+  }
+
   updateTracker(tracker: any, data: any, id: string): any {
     const newData = [];
+    const gameTime = new Date();
+    console.log('updating tracker', tracker);
     data.user.forEach((user) => {
       const userRecord = tracker.find((t) => {
         return t.user.id === user.id;
@@ -91,13 +148,14 @@ export class LiveTrackerService {
       const lastUpdate = userRecord.history[userRecord.history.length - 1];
       if (JSON.stringify(lastUpdate) !== JSON.stringify(player)) {
         userRecord.history.push(player);
-        const game = this.createGame(userRecord.history);
+        const game = this.createGame(userRecord.history, gameTime);
         userRecord.games.push(game);
       }
       newData.push(userRecord);
     });
     const newTracker = {};
     newTracker[id] = newData;
+    this.updateTrackerLastUpdate(id, gameTime);
     return this.replaceTrackerInSession(tracker, newTracker, id);
   }
 
@@ -138,7 +196,7 @@ export class LiveTrackerService {
     return this.findTracker(id);
   }
 
-  private createGame(userHistory: any): any {
+  private createGame(userHistory: any, gameTime: Date): any {
     const recent = userHistory[userHistory.length - 1];
     const previous = userHistory[userHistory.length - 2];
     const game: any = {};
@@ -177,6 +235,7 @@ export class LiveTrackerService {
         max_rank: recent.rank.ncsa.max_rank - previous.rank.ncsa.max_rank,
       }
     };
+    game['timestamp'] = gameTime
     return game;
   }
 

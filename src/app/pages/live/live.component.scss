@@ -1,13 +1,14 @@
-.results {
+.live-header {
+  height: 225px;
   &::before {
     content: '';
     position: absolute;
     z-index: -500;
     width: 100%;
-    height: 100%;
+    height: 225px;
     top: 0;
     left: 0;
-    background-image: url('/assets/backgrounds/maestro.jpg');
+    background-image: url('/assets/backgrounds/shield.jpg');
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -18,3 +19,13 @@
     filter: blur(3px) brightness(30%);
   }
 }
+
+.card {
+  transition: box-shadow .25s;
+  &:hover {
+    -webkit-box-shadow: 4px 4px 10px 2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 4px 4px 10px 2px rgba(0,0,0,0.75);
+    box-shadow: 4px 4px 10px 2px rgba(0,0,0,0.75);
+  }
+}
+

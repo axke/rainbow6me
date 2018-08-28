@@ -6,7 +6,7 @@
     <div class="align-self-center w-100">
       <small *ngIf="season" [innerHTML]="'Season ' + season"></small>
       <h5 class="text-white" [innerHTML]="rankMap[max ? maxRank : currentRank]"></h5>
-      <small class="d-block text-muted" [innerHTML]="'MMR: ' + max ? maxMMR.toFixed(2) : currentMMR.toFixed(2)"></small>
+      <small class="d-block text-muted" [innerHTML]="'MMR: ' + (max ? maxMMR.toFixed(0) : currentMMR.toFixed(2))"></small>
     </div>
   </div>
 </div>

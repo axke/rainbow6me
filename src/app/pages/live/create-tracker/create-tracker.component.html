@@ -1,0 +1,39 @@
+<div class="modal-header">
+  <h4 class="modal-title">Create Tracker Session</h4>
+  <button type="button" class="close" aria-label="Close" (click)="createTrackerModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="form-group">
+    <label>Session Name</label>
+    <input #session id="session" name="session" type="string" class="form-control border-secondary bg-secondary text-white" placeholder="Session Name" [(ngModel)]="details.name" />
+  </div>
+  <div class="form-group">
+    <label>Players</label>
+    <div class="input-group">
+      <input #user type="text" class="form-control border-secondary bg-secondary text-white"
+             placeholder="Add a player to session" (keyup.enter)="search(user.value)"/>
+      <div class="input-group-append">
+        <button class="btn btn-primary" (click)="search(user.value)">Add</button>
+      </div>
+    </div>
+    <div class="card mt-2" *ngIf="players && players.length > 0">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item media p-2" *ngFor="let player of players">
+          <div class="w-100">
+            <img class="mr-3 rounded d-inline-block align-top" [src]="player.imageURL" style="width: 64px" />
+            <div class="media-body d-inline-block">
+              <h5 class="mt-0 mb-1" [innerHTML]="player.name"></h5>
+              <span class="d-block text-muted" [innerHTML]="'Platform: ' + player.platform"></span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="createTrackerModal.close('Close click')">Close</button>
+  <button type="button" class="btn btn-primary" (click)="createTrackerDetails()">Create</button>
+</div>

@@ -5,11 +5,15 @@ import {HomeComponent} from './pages/home/home.component';
 import {OperatorsComponent} from './pages/player/operators/operators.component';
 import {SearchComponent} from './pages/search/search.component';
 import {ResultsComponent} from './pages/search/results/results.component';
+import {LiveComponent} from './pages/live/live.component';
+import {LiveTrackerComponent} from './pages/live/live-tracker/live-tracker.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'search', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
   {path: 'player/:id/:tab', component: PlayerComponent},
+  {path: 'live', component: LiveComponent},
+  {path: 'live/:id', component: LiveTrackerComponent},
   {path: 'search', component: SearchComponent},
   {path: 'search/:name', component: ResultsComponent},
 ];

@@ -10,7 +10,7 @@ export class SeasonRankComponent implements OnInit, OnChanges {
   @Input() rank: any;
   @Input() season: string;
   @Input() region: string;
-  @Input() max: boolean;
+  @Input() max = false;
   currentRank: number;
   currentMMR: number;
   maxRank: number;
@@ -18,15 +18,21 @@ export class SeasonRankComponent implements OnInit, OnChanges {
   rankMap = RankMap;
   constructor() { }
 
-  ngOnInit() {}
-
-  ngOnChanges() {
+  ngOnInit() {
     if (this.rank) {
       this.currentRank = this.rank ? this.rank[this.region].rank : 0;
       this.currentMMR = this.rank ? this.rank[this.region].mmr : 0;
       this.maxRank = this.rank ? this.rank[this.region].max_rank : 0;
       this.maxMMR = this.rank ? this.rank[this.region].max_mmr : 0;
+      if (!this.max) {
+        console.log('rank', this.rank)
+        console.log('currentmmr', this.currentMMR);
+      }
     }
+  }
+
+  ngOnChanges() {
+
   }
 
 }

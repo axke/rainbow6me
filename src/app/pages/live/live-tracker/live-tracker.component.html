@@ -1,5 +1,46 @@
-<div class="container">
-  <div class="card">
+<div class="live-tracker-header">
+  <div class="container h-100">
+    <div class="row h-75 justify-content-center align-items-center">
+      <div class="col-12">
+        <h3 class="mb-0" [innerHTML]="trackerDetails.name"></h3>
+        <small class="d-block text-muted mb-2" [innerHTML]="'Created: ' + trackerDetails.timestamp"></small>
+        <span class="d-block">
+          <span class="text-muted">Last Update:</span>
+          <span [innerHTML]="trackerDetails.lastUpdate"></span>
+        </span>
+        <span class="d-block">
+          <span class="text-muted">Next Update:</span>
+          <span>{{countDown | async}} seconds</span>
+        </span>
+      </div>
+    </div>
+    <div class="row h-25 justify-content-center">
+      <div class="col-12">
+        <div class="live-tracker-tabs">
+          <ul class="nav justify-content-center">
+            <li class="nav-item">
+              <a class="nav-link text-muted" [routerLink]="['/live']">
+                Sessions
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-muted" href="javascript:void(0)" (click)="updateTracker()">
+                Update
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-muted" href="javascript:void(0)" (click)="resetTacker()">
+                Reset
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container mt-4">
+  <div class="card" style="display: none">
     <div class="card-body">
       DEV BUTTONS <br/>
       <button class="btn btn-outline-primary" (click)="createTracker()">Create Tracker</button>
@@ -9,24 +50,15 @@
       <button class="btn btn-outline-primary" (click)="logTracker()">Log Tracker</button>
     </div>
   </div>
-  <div class="row mt-5">
+  <div class="row mt-4">
     <div class="col-4">
-      <div class="search mb-2">
-        <div class="input-group">
-          <input #user type="text" class="form-control border-secondary form-control- bg-secondary text-white"
-                 placeholder="Add a player to session" (keyup.enter)="search(user.value)"/>
-          <div class="input-group-append">
-            <button class="btn btn-primary" (click)="search(user.value)">Add</button>
-          </div>
-        </div>
-        <small class="text-muted" *ngIf="notFound">No user found with that name</small>
-      </div>
       <div class="card">
         <ul class="list-group list-group-flush" *ngIf="tracker && tracker.length > 0">
           <li class="list-group-item media p-2" *ngFor="let tracks of tracker">
             <div class="row" *ngIf="tracks && tracks.user">
               <div class="col-3">
-                <img class="mr-3 rounded d-inline-block align-top" [src]="tracks.user.imageURL" style="width: 100%"/>
+                <img class="mr-3 rounded d-inline-block align-top" [src]="tracks.user.imageURL"
+                     onError="this.src='assets/ranks/1.svg';" style="width: 100%"/>
               </div>
               <div class="col-9">
                 <span class="mt-0" [innerHTML]="tracks.user.name"></span>
@@ -68,7 +100,7 @@
       </div>
     </div>
     <div class="col-8">
-      <div class="card">
+      <!--<div class="card">
         <div class="card-body">
           <h4 class="text-muted text-center">{{chartStat.charAt(0).toUpperCase() + chartStat.substr(1)}} per game</h4>
           <canvas *ngIf="chartData && chartData.length > 0"
@@ -82,6 +114,33 @@
                   (chartHover)="chartHovered($event)"
                   (chartClick)="chartClicked($event)">
           </canvas>
+        </div>
+      </div>-->
+
+      <div class="card" *ngIf="data && data.length > 0">
+        <div class="card-body">
+          <div class="text-center mb-2">
+            <button class="btn btn-sm btn-primary" (click)="switchChartStat('kills')">Show Kills</button>
+            <button class="btn btn-sm btn-primary" (click)="switchChartStat('deaths')">Show Deaths</button>
+            <button class="btn btn-sm btn-primary" (click)="switchChartStat('assists')">Show Assists</button>
+          </div>
+          <h4 class="text-muted text-center">{{chartStat.charAt(0).toUpperCase() + chartStat.substr(1)}} per game</h4>
+          <ngx-charts-line-chart
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="data"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [legend]="showLegend"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel"
+            [autoScale]="autoScale"
+            yScaleMin="0"
+            (select)="onSelect($event)">
+          </ngx-charts-line-chart>
         </div>
       </div>
     </div>

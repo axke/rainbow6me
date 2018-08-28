@@ -12,7 +12,10 @@ import {ApiService} from '../../shared/services/api.service';
 })
 export class SearchComponent implements OnInit, AfterViewInit {
   @ViewChild('user') private elementRef: ElementRef;
-  constructor(private router: Router) { }
+  notFound = false;
+
+  constructor(private router: Router,
+              private apiService: ApiService) { }
 
   ngOnInit() {
   }
@@ -22,6 +25,15 @@ export class SearchComponent implements OnInit, AfterViewInit {
   }
 
   search(value: string) {
-    this.router.navigate(['/search', value]);
+    this.apiService.getUserByName(value).subscribe(
+      (users) => {
+        if (users[0]) {
+          this.router.navigate(['/player', users[0].id, 'summary']);
+        } else {
+          this.notFound = true;
+        }
+      },
+      error => console.error('ERROR:', error)
+    );
   }
 }
