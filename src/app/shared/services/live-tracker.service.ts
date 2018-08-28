@@ -34,6 +34,7 @@ export class LiveTrackerService {
     console.log('session details', sessionDetails);
     for (let i = 0; i < sessionDetails.length; i++) {
       if (sessionDetails[i].id === details.id) {
+        console.log('removing index', i);
         sessionDetails.splice(i, 1);
       }
     }
