@@ -122,7 +122,8 @@
             [xAxisLabel]="xAxisLabel"
             [yAxisLabel]="yAxisLabel"
             [autoScale]="autoScale"
-            yScaleMin="0"
+            [yAxisTickFormatting]="axisFormat"
+            [yScaleMin]="getYScaleMin()"
             (select)="onSelect($event)">
           </ngx-charts-line-chart>
         </div>

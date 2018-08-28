@@ -30,12 +30,13 @@ export class LiveTrackerComponent implements OnInit {
   showXAxis = true;
   showYAxis = true;
   yMin = 0;
-  gradient = true;
+  gradient = false;
   showLegend = true;
   showXAxisLabel = true;
   xAxisLabel = 'Games';
   showYAxisLabel = true;
   yAxisLabel = 'Kills';
+  yScaleMin = 0;
 
   colorScheme: any;
 
@@ -55,7 +56,7 @@ export class LiveTrackerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.colorScheme = this.colorSets.find(s => s.name === 'vivid');
+    this.colorScheme = this.colorSets.find(s => s.name === 'nightLights');
     this.id = this.route.snapshot.params.id;
     if (this.id) {
       this.trackerDetails = this.liveTrackerService.findTrackerDetails(this.id);
@@ -208,7 +209,24 @@ export class LiveTrackerComponent implements OnInit {
       });
       this.data = [...this.data, dataPoint];
     });
-    console.log(this.data);
+    this.getYScaleMin();
+  }
+
+  axisFormat(val) {
+    if (val % 1 === 0) {
+      return val.toLocaleString();
+    } else {
+      return '';
+    }
+  }
+
+  getYScaleMin() {
+    if (['kills', 'deaths', 'assists'].includes(this.chartStat)) {
+      console.log(this.chartStat, 0);
+      this.yScaleMin = 0;
+    } else {
+      this.yScaleMin = null;
+    }
   }
 
   switchChartStat(stat: string, statProp: string = 'general') {
