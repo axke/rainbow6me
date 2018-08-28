@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit {
   refreshIcon = faSync;
   searchIcon = faSearch;
   homeIcon = faHome;
-  chartIcon = faChartLine
+  chartIcon = faChartLine;
   constructor() { }
 
   ngOnInit() {

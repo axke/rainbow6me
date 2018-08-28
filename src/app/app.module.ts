@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
-import {NgbModal, NgbModalModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {ChartsModule} from 'ng2-charts';
 
@@ -31,6 +31,9 @@ import {CreateTrackerComponent} from './pages/live/create-tracker/create-tracker
 import {FormsModule} from '@angular/forms';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FavoritesComponent} from './pages/favorites/favorites.component';
+import {NavbarComponent} from './shared/components/navbar/navbar.component';
+import {FavoritesService} from './shared/services/favorites.service';
 
 @NgModule({
   declarations: [
@@ -53,6 +56,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     LiveTrackerComponent,
     LiveComponent,
     CreateTrackerComponent,
+    FavoritesComponent,
+    NavbarComponent,
   ],
   entryComponents: [
     CreateTrackerComponent
@@ -70,7 +75,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
   ],
   providers: [
     ApiService,
-    LiveTrackerService
+    LiveTrackerService,
+    FavoritesService
   ],
   bootstrap: [AppComponent]
 })

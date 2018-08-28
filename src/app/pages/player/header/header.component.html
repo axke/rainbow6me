@@ -18,20 +18,9 @@
           <a class="nav-link text-muted" [routerLink]="['/player', player.user.id.toLowerCase(), 'operators']"
              routerLinkActive="active">Operators</a>
         </li>
-        <!--<li class="nav-item">
-          <a class="nav-link text-muted" href="javascript:void(0)" [routerLink]="['/player', player.user.id.toLowerCase(), 'live']"
-             routerLinkActive="active">
-            <fa-icon [icon]="chartIcon"></fa-icon>
-          </a>
-        </li>-->
         <li class="nav-item">
           <a class="nav-link text-muted" href="javascript:void(0)" (click)="refreshPlayer()">
             <fa-icon [icon]="refreshIcon"></fa-icon>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-muted" href="javascript:void(0)" [routerLink]="['/search']">
-            <fa-icon [icon]="homeIcon"></fa-icon>
           </a>
         </li>
       </ul>

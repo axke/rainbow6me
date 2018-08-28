@@ -24,10 +24,6 @@ export class SeasonRankComponent implements OnInit, OnChanges {
       this.currentMMR = this.rank ? this.rank[this.region].mmr : 0;
       this.maxRank = this.rank ? this.rank[this.region].max_rank : 0;
       this.maxMMR = this.rank ? this.rank[this.region].max_mmr : 0;
-      if (!this.max) {
-        console.log('rank', this.rank)
-        console.log('currentmmr', this.currentMMR);
-      }
     }
   }
 

@@ -7,8 +7,12 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class OperatorComponent implements OnInit {
   @Input() operator: any;
-  attackers = ['ash', 'twitch', 'dokkaebi', 'hibana', 'glaz', 'iq', 'blitz', 'ting', 'zofia',
-    'blackbeard', 'sledge', 'thatcher', 'montagne', 'fuze', 'lion', 'buck', 'capitao', 'thermite', 'jackal', 'finka', 'maverick']
+  attackers = ['ash', 'twitch', 'dokkaebi', 'hibana',
+    'glaz', 'iq', 'blitz', 'ting', 'zofia',
+    'blackbeard', 'sledge', 'thatcher',
+    'montagne', 'fuze', 'lion',
+    'buck', 'capitao', 'thermite',
+    'jackal', 'finka', 'maverick'];
   constructor() { }
 
   ngOnInit() {

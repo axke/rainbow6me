@@ -236,7 +236,7 @@ export class LiveTrackerService {
         max_rank: recent.rank.ncsa.max_rank - previous.rank.ncsa.max_rank,
       }
     };
-    game['timestamp'] = gameTime
+    game['timestamp'] = gameTime;
     return game;
   }
 

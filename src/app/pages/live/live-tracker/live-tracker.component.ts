@@ -56,7 +56,7 @@ export class LiveTrackerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.colorScheme = this.colorSets.find(s => s.name === 'nightLights');
+    this.colorScheme = this.colorSets.find(s => s.name === 'ocean');
     this.id = this.route.snapshot.params.id;
     if (this.id) {
       this.trackerDetails = this.liveTrackerService.findTrackerDetails(this.id);
@@ -119,7 +119,7 @@ export class LiveTrackerComponent implements OnInit {
         players = this.flattenPlayers(players, details.players);
         console.log('flat plats', players);
         this.tracker = this.liveTrackerService.createTracker(this.id, players);
-        console.log('tracker post create', this.tracker)
+        console.log('tracker post create', this.tracker);
         this.updateTracker();
       }
       // this.updateTracker();
