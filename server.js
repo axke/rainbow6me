@@ -41,7 +41,7 @@ if (process.env.NODE_ENV === 'production') {
     }
   };
 
-  // app.use(forceLive());
+  app.use(forceLive());
   app.use(forceSSL());
 
   // if not development, run the ng app
