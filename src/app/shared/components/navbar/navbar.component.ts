@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import {NavigationEnd, Router} from '@angular/router';
+import {ApiService} from '../../services/api.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +14,9 @@ export class NavbarComponent implements OnInit {
   goIcon = faChevronRight;
   showSearch: boolean;
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              private apiService: ApiService
+  ) {
   }
 
   ngOnInit() {
@@ -27,7 +30,16 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  search(name) {
-
+  search(value: string) {
+    this.apiService.getUserByName(value).subscribe(
+      (users) => {
+        if (users[0]) {
+          this.router.navigate(['/player', users[0].id, 'summary']);
+        } else {
+          this.notFound = true;
+        }
+      },
+      error => console.error('ERROR:', error)
+    );
   }
 }
