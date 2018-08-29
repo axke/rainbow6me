@@ -34,7 +34,13 @@ if (process.env.NODE_ENV === 'production') {
   // if not development, run the ng app
   app.use(express.static(`${__dirname}/dist`));
   app.get(/^\/(?!api).*/, (req, res) => {
-    res.sendFile(`${__dirname}/dist/index.html`);
+    const host = req.hostname;
+    const url = req.url;
+    if (host === 'rainbow6me.herokuapp.com') {
+      res.redirect(301, 'https://rainbow6.me' + url);
+    } else {
+      res.sendFile(`${__dirname}/dist/index.html`);
+    }
   });
 }
 
