@@ -220,9 +220,12 @@ export class LiveTrackerComponent implements OnInit {
   getYScaleMin() {
     if (['kills', 'deaths', 'assists'].includes(this.chartStat)) {
       this.yScaleMin = 0;
+      this.autoScale = false;
     } else {
       this.yScaleMin = null;
+      this.autoScale = true;
     }
+    console.log('yMin', this.yScaleMin);
   }
 
   switchChartStat(stat: string, statProp: string = 'general') {
