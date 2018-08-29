@@ -163,7 +163,7 @@ export class LiveTrackerService {
   getStatTotals(userGames: any[]) {
     const generalStats: any[] = [];
     const naRank: any[] = [];
-    if (userGames && userGames.length > 1) {
+    if (userGames && userGames.length > 0) {
       userGames.forEach((game) => {
         generalStats.push(game.stats.general);
         naRank.push(game.rank.ncsa);
