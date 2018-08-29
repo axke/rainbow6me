@@ -35,7 +35,7 @@ if (process.env.NODE_ENV === 'production') {
       // Don't allow user to hit Heroku now that we have a domain
       const host = req.get('Host');
       if (host === 'rainbow6me.herokuapp.com') {
-        return res.redirect(301, 'https://rainbow6.me/' + req.originalUrl);
+        return res.redirect(301, 'https://www.rainbow6.me' + req.originalUrl);
       }
       next();
     }
