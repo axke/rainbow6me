@@ -20,6 +20,7 @@ export class SeasonRankComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     if (this.rank) {
+      console.log('rank', this.rank);
       this.currentRank = this.rank ? this.rank[this.region].rank : 0;
       this.currentMMR = this.rank ? this.rank[this.region].mmr : 0;
       this.maxRank = this.rank ? this.rank[this.region].max_rank : 0;

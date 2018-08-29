@@ -188,19 +188,22 @@ export class LiveTrackerComponent implements OnInit {
         name: tracks.user.name,
         series: []
       };
-      tracks.games.forEach((game, i) => {
-        let statistic = game.stats.general;
-        switch (statProp) {
-          case 'rank':
-            statistic = game.rank.ncsa;
-            this.yMin = null;
-            break;
-          default:
+      let statistic;
+      switch (statProp) {
+        case 'rank':
+          tracks.history.forEach((history, i) => {
+            statistic = history.rank.ncsa.mmr;
+            dataPoint.series.push({name: (i + 1).toString(), value: statistic});
+          });
+          this.yMin = null;
+          break;
+        default:
+          tracks.games.forEach((game, i) => {
             statistic = game.stats.general;
-            this.yMin = 0;
-        }
-        dataPoint.series.push({name: (i + 1).toString(), value: statistic[stat]});
-      });
+            dataPoint.series.push({name: (i + 1).toString(), value: statistic[stat]});
+          });
+          this.yMin = 0;
+      }
       this.data = [...this.data, dataPoint];
     });
     this.getYScaleMin();
