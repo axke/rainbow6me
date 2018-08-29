@@ -228,6 +228,10 @@ export class LiveTrackerComponent implements OnInit {
     console.log('yMin', this.yScaleMin);
   }
 
+  round(val): number {
+    return Math.round(val);
+  }
+
   switchChartStat(stat: string, statProp: string = 'general') {
     this.chartStat = stat;
     this.updateChart(this.chartStat, statProp);

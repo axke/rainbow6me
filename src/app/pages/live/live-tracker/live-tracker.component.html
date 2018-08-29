@@ -125,6 +125,11 @@
             [yAxisTickFormatting]="axisFormat"
             [yScaleMin]="yScaleMin"
             (select)="onSelect($event)">
+            <ng-template #tooltipTemplate let-model="model">
+              <h6 class="d-block mb-0" style="color: {{model.color}}">{{model.series}}</h6>
+              {{round(model.value) !== model.value ? model.value.toFixed(2) : model.value}} {{chartStat.charAt(0).toUpperCase() + chartStat.substr(1)}}
+            </ng-template>
+
           </ngx-charts-line-chart>
         </div>
       </div>
