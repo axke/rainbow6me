@@ -19,7 +19,7 @@ app.use(compression());
 
 if (process.env.NODE_ENV === 'production') {
   // force SSL
-  const forceSSL = function () {
+  const forceSSL = () => {
     return function (req, res, next) {
       if (req.headers['x-forwarded-proto'] !== 'https') {
         return res.redirect(
@@ -29,19 +29,27 @@ if (process.env.NODE_ENV === 'production') {
       next();
     }
   };
+
+  const forceLive = () => {
+    return (req, res, next) => {
+      // Don't allow user to hit Heroku now that we have a domain
+      const host = req.get('Host');
+      if (host === 'rainbow6me.herokuapp.com') {
+        return res.redirect(301, 'https://rainbow6.me/' + req.originalUrl);
+      }
+      next();
+    }
+  };
+
+  app.use(forceLive());
   app.use(forceSSL());
 
   // if not development, run the ng app
   app.use(express.static(`${__dirname}/dist`));
   app.get(/^\/(?!api).*/, (req, res) => {
-    const host = req.hostname;
-    const url = req.url;
-    if (host === 'rainbow6me.herokuapp.com') {
-      res.redirect(301, 'https://rainbow6.me' + url);
-    } else {
-      res.sendFile(`${__dirname}/dist/index.html`);
-    }
+    res.sendFile(`${__dirname}/dist/index.html`);
   });
+
 }
 
 app.get('/api', (req, res) => {
