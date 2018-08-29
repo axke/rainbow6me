@@ -107,19 +107,15 @@ export class LiveTrackerComponent implements OnInit {
   }
 
   createTracker() {
-    console.log('need to make a new tracker based on the player');
     const details = this.liveTrackerService.findTrackerDetails(this.id);
     const playerIds = details.players.map((d) => {
       return d.id;
     }).join(',');
     console.log(playerIds);
     this.apiService.getPlayersData(playerIds).subscribe((players) => {
-      console.log('players', players);
       if (players) {
         players = this.flattenPlayers(players, details.players);
-        console.log('flat plats', players);
         this.tracker = this.liveTrackerService.createTracker(this.id, players);
-        console.log('tracker post create', this.tracker);
         this.updateTracker();
       }
       // this.updateTracker();
@@ -163,7 +159,6 @@ export class LiveTrackerComponent implements OnInit {
   resetTacker() {
     this.liveTrackerService.deleteTracker(this.id);
     this.createTracker();
-    console.log('reset clicked');
   }
 
   deleteTracker() {
@@ -177,7 +172,6 @@ export class LiveTrackerComponent implements OnInit {
 
   getTotals() {
     this.tracker.forEach((track) => {
-      console.log('get totals for', track);
       track.totals = this.liveTrackerService.getStatTotals(track.games);
     });
   }
@@ -222,7 +216,6 @@ export class LiveTrackerComponent implements OnInit {
 
   getYScaleMin() {
     if (['kills', 'deaths', 'assists'].includes(this.chartStat)) {
-      console.log(this.chartStat, 0);
       this.yScaleMin = 0;
     } else {
       this.yScaleMin = null;
