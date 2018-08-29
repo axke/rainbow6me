@@ -193,7 +193,7 @@ export class LiveTrackerComponent implements OnInit {
         case 'rank':
           tracks.history.forEach((history, i) => {
             statistic = history.rank.ncsa.mmr;
-            dataPoint.series.push({name: (i + 1).toString(), value: statistic});
+            dataPoint.series.push({name: (i).toString(), value: statistic});
           });
           this.yMin = null;
           break;
