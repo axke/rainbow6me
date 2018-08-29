@@ -58,7 +58,7 @@
             <div class="row" *ngIf="tracks && tracks.user">
               <div class="col-3">
                 <img class="mr-3 rounded d-inline-block align-top" [src]="tracks.user.imageURL"
-                     onError="this.src='assets/ranks/1.svg';" style="width: 100%"/>
+                     onError="this.src='assets/img/ranks/1.svg';" style="width: 100%"/>
               </div>
               <div class="col-9">
                 <a href="javascript:void(0)" [routerLink]="['/player', tracks.user.id, 'summary']" [innerHTML]="tracks.user.name"></a>
