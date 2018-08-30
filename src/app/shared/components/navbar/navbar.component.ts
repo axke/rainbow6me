@@ -22,7 +22,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.router.events.subscribe((val: NavigationEnd) => {
       // see also
-      if (val && val.url && (val.url.indexOf('/player') > -1 || val.url.indexOf('/live') > -1)) {
+      if (val && val.url && (val.url.indexOf('/player') > -1 || val.url.indexOf('/live') > -1 || val.url.indexOf('/favorites') > -1)) {
         this.showSearch = true;
       } else {
         this.showSearch = false;

@@ -23,6 +23,11 @@
             <fa-icon [icon]="refreshIcon"></fa-icon>
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="javascript:void(0)" [ngClass]="{'favorite': isFavorited, 'text-muted': !isFavorited}" (click)="favoriteUnfavorite()">
+            <fa-icon [icon]="starIcon"></fa-icon>
+          </a>
+        </li>
       </ul>
     </div>
   </div>

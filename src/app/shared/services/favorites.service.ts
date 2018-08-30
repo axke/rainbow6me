@@ -9,6 +9,11 @@ export class FavoritesService {
     return JSON.parse(localStorage.getItem('favorites') || '[]');
   }
 
+  findFavorite(id: string) {
+    const favorites = this.getFavorites();
+    return favorites.find((f) => f === id);
+  }
+
   addFavorite(id: string): string[] {
     const favorites: string[] = this.getFavorites();
     favorites.push(id);

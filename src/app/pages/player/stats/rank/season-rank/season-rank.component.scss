@@ -109,3 +109,15 @@
     }
   }
 }
+
+.season-11 {
+  border-left: 4px solid $grimsky;
+  border-radius: 5px;
+  .season-name {
+    color: $grimsky;
+    &::after {
+      content: 'Grim Sky';
+    }
+  }
+}
+
