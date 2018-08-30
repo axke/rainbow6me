@@ -34,7 +34,7 @@ export class NavbarComponent implements OnInit {
     this.apiService.getUserByName(value).subscribe(
       (users) => {
         if (users[0]) {
-          this.router.navigate(['/player', users[0].id, 'summary']);
+          this.router.navigate(['/player', users[0].id]);
         } else {
           this.notFound = true;
         }

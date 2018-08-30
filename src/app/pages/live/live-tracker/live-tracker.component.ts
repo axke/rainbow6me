@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {LiveTrackerService} from '../../../shared/services/live-tracker.service';
 import {ActivatedRoute} from '@angular/router';
 import {ApiService} from '../../../shared/services/api.service';
-import {faSync, faHome} from '@fortawesome/free-solid-svg-icons';
+import {faSync, faHome, faUndo, faBroom} from '@fortawesome/free-solid-svg-icons';
 import {timer} from 'rxjs/observable/timer';
 import {take, map, last} from 'rxjs/operators';
 import * as moment from 'moment';
@@ -21,6 +21,7 @@ export class LiveTrackerComponent implements OnInit {
   notFound: boolean;
   syncIcon = faSync;
   homeIcon = faHome;
+  resetIcon = faBroom;
   // ngx-charts
   data: any[] = [];
   chartStat = 'kills';
@@ -57,6 +58,8 @@ export class LiveTrackerComponent implements OnInit {
 
   ngOnInit() {
     this.colorScheme = this.colorSets.find(s => s.name === 'ocean');
+    this.colorScheme.domain.unshift('#2e93b3');
+    console.log(this.colorScheme);
     this.id = this.route.snapshot.params.id;
     if (this.id) {
       this.trackerDetails = this.liveTrackerService.findTrackerDetails(this.id);

@@ -3,10 +3,10 @@
     <span class="m-0">Best Ranks</span>
   </div>
   <div class="card-body">
-    <div *ngFor="let rank of seasons">
+    <div *ngFor="let rank of seasons" class="mb-3">
       <app-season-rank [rank]="rank" [region]="region" [season]="rank.season" max="true"></app-season-rank>
     </div>
-    <div class="pt-1 text-center">
+    <div class="text-center mt-1">
       <small class="text-muted">Older seasons not available</small>
     </div>
   </div>

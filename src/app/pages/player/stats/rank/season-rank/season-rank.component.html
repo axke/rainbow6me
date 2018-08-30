@@ -1,11 +1,10 @@
-<div class="row" *ngIf="rank">
-  <div class="col-sm-4">
-    <img class="w-100 d-inline-block" src="assets/img/ranks/{{max ? maxRank : currentRank}}.svg"/>
+<div class="row season-{{season}}" *ngIf="rank">
+  <div class="col-sm-3 d-flex">
+    <img class="w-100 d-inline-block align-self-center" src="assets/img/ranks/{{max ? maxRank : currentRank}}.svg"/>
   </div>
-  <div class="col-sm-8 d-flex">
+  <div class="col-sm-9 d-flex">
     <div class="align-self-center w-100" [ngClass]="{'text-center' : !max}">
-      <small class="d-block" *ngIf="season" [innerHTML]="'Season ' + season"></small>
-
+      <small class="d-block season-name" *ngIf="season"></small>
       <small *ngIf="!max" class="d-inline-block align-top text-danger mr-3 mt-1"
              [innerHTML]="'-' + nextPrevious.previous.mmr.toFixed(1)"></small>
       <div class="d-inline-block" [ngClass]="{'text-left' : !max}">
@@ -20,4 +19,3 @@
     </div>
   </div>
 </div>
-

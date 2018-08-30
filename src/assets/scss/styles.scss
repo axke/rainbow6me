@@ -45,3 +45,9 @@ body,html{
 .pointer {
   cursor: pointer;
 }
+
+a {
+  &:hover {
+    text-decoration: none;
+  }
+}

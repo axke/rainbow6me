@@ -12,6 +12,7 @@ import {FavoritesComponent} from './pages/favorites/favorites.component';
 const routes: Routes = [
   {path: '', redirectTo: 'search', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
+  {path: 'player/:id', component: PlayerComponent},
   {path: 'player/:id/:tab', component: PlayerComponent},
   {path: 'live', component: LiveComponent},
   {path: 'live/:id', component: LiveTrackerComponent},

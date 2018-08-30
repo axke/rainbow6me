@@ -1,6 +1,6 @@
 <div class="live-tracker-header">
   <div class="container h-100">
-    <div class="row h-75 justify-content-center align-items-center">
+    <div class="row justify-content-center align-items-center">
       <div class="col-12">
         <h3 class="mb-0" [innerHTML]="trackerDetails.name"></h3>
         <small class="d-block text-muted mb-2" [innerHTML]="'Created: ' + trackerDetails.timestamp"></small>
@@ -14,7 +14,7 @@
         </span>
       </div>
     </div>
-    <div class="row h-25 justify-content-center">
+    <!--<div class="row h-25 justify-content-center">
       <div class="col-12">
         <div class="live-tracker-tabs">
           <ul class="nav justify-content-center">
@@ -36,7 +36,7 @@
           </ul>
         </div>
       </div>
-    </div>
+    </div>-->
   </div>
 </div>
 <div class="container mt-4">
@@ -58,10 +58,12 @@
             <div class="row" *ngIf="tracks && tracks.user">
               <div class="col-3">
                 <img class="mr-3 rounded d-inline-block align-top" [src]="tracks.user.imageURL"
-                     onError="this.src='assets/img/ubisoft.svg';this.style='filter:invert(1);width: 100%;';" style="width: 100%"/>
+                     onError="this.src='assets/img/ubisoft.svg';"
+                     style="width: 100%"/>
               </div>
               <div class="col-9">
-                <a href="javascript:void(0)" [routerLink]="['/player', tracks.user.id, 'summary']" [innerHTML]="tracks.user.name"></a>
+                <a href="javascript:void(0)" [routerLink]="['/player', tracks.user.id, 'summary']"
+                   [innerHTML]="tracks.user.name"></a>
                 <small class="row mt-1"
                        *ngIf="tracks.games && tracks.games.length > 0 && tracks.totals && tracks.totals.stats">
                   <div class="col-6">
@@ -101,6 +103,18 @@
     </div>
     <div class="col-8">
       <div class="card" *ngIf="data && data.length > 0">
+        <div class="card-header">
+          <div class="float-left">
+            <a class="text-muted" href="javascript:void(0)" (click)="resetTacker()">
+              Reset Tracker
+            </a>
+          </div>
+          <div class="float-right">
+            <a class="text-muted" href="javascript:void(0)" (click)="updateTracker()">
+              <fa-icon [icon]="syncIcon"></fa-icon>
+            </a>
+          </div>
+        </div>
         <div class="card-body">
           <div class="text-center mb-2">
             <button class="btn btn-sm btn-primary" (click)="switchChartStat('kills')">Show Kills</button>
@@ -127,7 +141,8 @@
             (select)="onSelect($event)">
             <ng-template #tooltipTemplate let-model="model">
               <h6 class="d-block mb-0" style="color: {{model.color}}">{{model.series}}</h6>
-              {{round(model.value) !== model.value ? model.value.toFixed(2) : model.value}} {{chartStat.charAt(0).toUpperCase() + chartStat.substr(1)}}
+              {{round(model.value) !== model.value ? model.value.toFixed(2) : model.value}}
+              {{chartStat.charAt(0).toUpperCase() + chartStat.substr(1)}}
             </ng-template>
 
           </ngx-charts-line-chart>

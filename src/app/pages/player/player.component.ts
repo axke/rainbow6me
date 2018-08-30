@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ApiService} from '../../shared/services/api.service';
 
 @Component({
@@ -15,6 +15,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   private sub: any;
 
   constructor(private route: ActivatedRoute,
+              private router: Router,
               private api: ApiService) {
   }
 
@@ -22,6 +23,9 @@ export class PlayerComponent implements OnInit, OnDestroy {
     this.sub = this.route.params.subscribe(params => {
       this.id = params['id'];
       this.tab = params['tab'];
+      if (!this.tab) {
+        this.router.navigate(['/player', this.id, 'summary']);
+      }
       if (this.id && this.tab) {
         this.load();
       }
