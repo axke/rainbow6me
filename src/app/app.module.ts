@@ -34,6 +34,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FavoritesComponent} from './pages/favorites/favorites.component';
 import {NavbarComponent} from './shared/components/navbar/navbar.component';
 import {FavoritesService} from './shared/services/favorites.service';
+import {ModesComponent } from './pages/player/stats/modes/modes.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,8 @@ import {FavoritesService} from './shared/services/favorites.service';
     CreateTrackerComponent,
     FavoritesComponent,
     NavbarComponent,
+    ModesComponent,
+    FooterComponent,
   ],
   entryComponents: [
     CreateTrackerComponent

@@ -22,7 +22,7 @@
       <ul class="list-group list-group-flush">
         <li class="list-group-item media p-2" *ngFor="let player of players">
           <div class="w-100">
-            <img class="mr-3 rounded d-inline-block align-top" [src]="player.imageURL" style="width: 64px" />
+            <img class="mr-3 rounded d-inline-block align-top" [src]="player.imageURL" onError="this.src='assets/img/ubisoft.svg';this.style='filter:invert(1);width: 64px;';" style="width: 64px" />
             <div class="media-body d-inline-block">
               <h5 class="mt-0 mb-1" [innerHTML]="player.name"></h5>
               <span class="d-block text-muted" [innerHTML]="'Platform: ' + player.platform"></span>

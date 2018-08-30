@@ -8,9 +8,12 @@ import {Component, Input, OnInit} from '@angular/core';
 export class StatsComponent implements OnInit {
   @Input() player: any;
   @Input() seasons: any;
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit() {
+    console.log('player', this.player);
   }
 
 }
