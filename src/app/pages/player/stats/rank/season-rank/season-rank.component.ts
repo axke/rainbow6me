@@ -67,15 +67,16 @@ export class SeasonRankComponent implements OnInit, OnChanges {
     let previous = -1000;
     for (const upperBounds of this.mmrScale) {
       if (this.between(this.currentMMR, previous, upperBounds)) {
-        const isNotMinMax = this.currentRank > 0 && this.currentRank < 20;
+        const isNotMax = this.currentRank < 20;
+        const isNotMin = this.currentRank !== 0;
         const np = {
           next: {
-            mmr: isNotMinMax ? upperBounds - this.currentMMR : 0,
-            rank: isNotMinMax ? this.currentRank + 1 : this.currentRank
+            mmr: isNotMax ? upperBounds - this.currentMMR : 0,
+            rank: isNotMax ? this.currentRank + 1 : this.currentRank
           },
           previous: {
-            mmr: isNotMinMax ? this.currentMMR - previous : 0,
-            rank: isNotMinMax ? this.currentRank - 1 : this.currentRank
+            mmr: isNotMin ? this.currentMMR - previous : 0,
+            rank: isNotMin ? this.currentRank - 1 : this.currentRank
           }
         };
         return np;
