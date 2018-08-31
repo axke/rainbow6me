@@ -55,6 +55,7 @@
     "ng2-charts": "^1.6.0",
     "r6api": "github:axke/r6api",
     "rxjs": "^5.5.0",
+    "tesseract.js": "^1.0.10",
     "zone.js": "^0.8.19"
   },
   "engines": {
@@ -70,6 +71,7 @@
     "@types/moment": "^2.13.0",
     "@types/moment-duration-format": "^2.2.2",
     "@types/node": "~6.0.60",
+    "@types/tesseract.js": "0.0.2",
     "codelyzer": "^4.0.1",
     "commitizen": "^2.10.1",
     "dotenv": "^6.0.0",

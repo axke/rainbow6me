@@ -1,6 +1,6 @@
 <div class="container">
   <ngb-alert type="dark" [dismissible]="false">
-    <strong>NOTE</strong> This interface is a placeholder.
+    <strong class="d-block">NOTE</strong> This interface is a placeholder. Real interface to come soon.
   </ngb-alert>
   <div class="mt-4" *ngFor="let favorite of favorites">
     <a [routerLink]="['/player', favorite.id]" [innerHTML]="favorite.name"></a>

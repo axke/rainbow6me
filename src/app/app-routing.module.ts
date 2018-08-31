@@ -8,6 +8,7 @@ import {ResultsComponent} from './pages/search/results/results.component';
 import {LiveComponent} from './pages/live/live.component';
 import {LiveTrackerComponent} from './pages/live/live-tracker/live-tracker.component';
 import {FavoritesComponent} from './pages/favorites/favorites.component';
+import {LobbyComponent} from './pages/search/lobby/lobby.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'search', pathMatch: 'full'},
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'live/:id', component: LiveTrackerComponent},
   {path: 'favorites', component: FavoritesComponent},
   {path: 'search', component: SearchComponent},
+  {path: 'search/lobby', component: LobbyComponent},
   {path: 'search/:name', component: ResultsComponent},
 ];
 

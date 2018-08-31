@@ -2,5 +2,4 @@
 <div class="container-fluid">
   <app-player-stats *ngIf="(player && !tab) || (player && (tab && tab.toLowerCase() === 'summary'))" [player]="player" [seasons]="seasons"></app-player-stats>
   <app-player-operators *ngIf="player && player.stats && player.stats.operator && tab && tab.toLowerCase() === 'operators'" [operators]="player.stats.operator"></app-player-operators>
-  <app-player-live-tracker *ngIf="player && player.user && tab && tab.toLowerCase() === 'live'"></app-player-live-tracker>
 </div>

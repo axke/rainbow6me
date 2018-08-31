@@ -36,6 +36,8 @@ import {NavbarComponent} from './shared/components/navbar/navbar.component';
 import {FavoritesService} from './shared/services/favorites.service';
 import {ModesComponent } from './pages/player/stats/modes/modes.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
+import { LobbyComponent } from './pages/search/lobby/lobby.component';
+import { StatComponent } from './pages/player/stats/general/stat/stat.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +64,8 @@ import { FooterComponent } from './shared/components/footer/footer.component';
     NavbarComponent,
     ModesComponent,
     FooterComponent,
+    LobbyComponent,
+    StatComponent,
   ],
   entryComponents: [
     CreateTrackerComponent

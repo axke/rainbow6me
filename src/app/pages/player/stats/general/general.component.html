@@ -5,64 +5,28 @@
   <div class="card-body">
     <div class="row text-center">
       <div class="col">
-        <div class="stat">
-          <span class="mb-0 text-white" [innerHTML]="generalStats.won || 0"></span>
-          <small class="text-uppercase">Wins</small>
-        </div>
-        <div class="stat">
-          <span class="mb-0 text-white" [innerHTML]="generalStats.lost || 0"></span>
-          <small class="text-uppercase">Losses</small>
-        </div>
+        <app-stat [stat]="generalStats.won" statLabel="Wins"></app-stat>
+        <app-stat [stat]="generalStats.lost" statLabel="Losses"></app-stat>
       </div>
       <div class="col">
-        <div class="stat">
-          <span class="mb-0 text-white" [innerHTML]="generalStats.kills || 0"></span>
-          <small class="text-uppercase">Kills</small>
-        </div>
-        <div class="stat">
-          <span class="mb-0 text-white" [innerHTML]="generalStats.deaths || 0"></span>
-          <small class="text-uppercase">Deaths</small>
-        </div>
+        <app-stat [stat]="generalStats.kills" statLabel="Kills"></app-stat>
+        <app-stat [stat]="generalStats.deaths" statLabel="Deaths"></app-stat>
       </div>
       <div class="col">
-        <div class="stat">
-          <span class="mb-0 text-white" [innerHTML]="generalStats.assists || 0"></span>
-          <small class="text-uppercase">Assists</small>
-        </div>
-        <div class="stat">
-          <span class="mb-0 text-white" [innerHTML]="generalStats.meleeKills || 0"></span>
-          <small class="text-uppercase">Melee Kills</small>
-        </div>
+        <app-stat [stat]="generalStats.assists" statLabel="Assists"></app-stat>
+        <app-stat [stat]="generalStats.meleeKills" statLabel="Melee Kills"></app-stat>
       </div>
       <div class="col">
-        <div class="stat">
-          <span class="mb-0 text-white" [innerHTML]="generalStats.dbno"></span>
-          <small class="text-uppercase">DBNO</small>
-        </div>
-        <div class="stat">
-          <span class="mb-0 text-white" [innerHTML]="generalStats.headshot"></span>
-          <small class="text-uppercase">Headshots</small>
-        </div>
+        <app-stat [stat]="generalStats.dbno" statLabel="DBNO"></app-stat>
+        <app-stat [stat]="generalStats.headshot" statLabel="Headshots"></app-stat>
       </div>
       <div class="col">
-        <div class="stat">
-          <span class="mb-0 text-white" [innerHTML]="((generalStats.won / generalStats.played) * 100).toFixed(2) + '%'"></span>
-          <small class="text-uppercase">Win %</small>
-        </div>
-        <div class="stat">
-          <span class="mb-0 text-white" [innerHTML]="(generalStats.kills / generalStats.deaths).toFixed(2)"></span>
-          <small class="text-uppercase">K/D ratio</small>
-        </div>
+        <app-stat [stat]="((generalStats.won / generalStats.played) * 100).toFixed(2) + '%'" statLabel="Win %"></app-stat>
+        <app-stat [stat]="(generalStats.kills / generalStats.deaths).toFixed(2)" statLabel="K/D Ratio"></app-stat>
       </div>
       <div class="col">
-        <div class="stat">
-          <span class="mb-0 text-white" [innerHTML]="((generalStats.headshot / generalStats.kills) * 100).toFixed(2) + '%'"></span>
-          <small class="text-uppercase">Headshot %</small>
-        </div>
-        <div class="stat">
-          <span class="mb-0 text-white" [innerHTML]="(generalStats.timePlayed / 60 / 60).toFixed(0)"></span>
-          <small class="text-uppercase">Hours</small>
-        </div>
+        <app-stat [stat]="((generalStats.headshot / generalStats.kills) * 100).toFixed(2) + '%'" statLabel="Headshot %"></app-stat>
+        <app-stat [stat]="(generalStats.timePlayed / 60 / 60).toFixed(0)" statLabel="Hours"></app-stat>
       </div>
     </div>
   </div>
