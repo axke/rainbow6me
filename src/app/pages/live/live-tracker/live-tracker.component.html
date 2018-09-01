@@ -1,0 +1,153 @@
+<div class="live-tracker-header">
+  <div class="container h-100">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-12">
+        <h3 class="mb-0" [innerHTML]="trackerDetails.name"></h3>
+        <small class="d-block text-muted mb-2" [innerHTML]="'Created: ' + trackerDetails.timestamp"></small>
+        <span class="d-block">
+          <span class="text-muted">Last Update:</span>
+          <span [innerHTML]="trackerDetails.lastUpdate"></span>
+        </span>
+        <span class="d-block">
+          <span class="text-muted">Next Update:</span>
+          <span>{{countDown | async}} seconds</span>
+        </span>
+      </div>
+    </div>
+    <!--<div class="row h-25 justify-content-center">
+      <div class="col-12">
+        <div class="live-tracker-tabs">
+          <ul class="nav justify-content-center">
+            <li class="nav-item">
+              <a class="nav-link text-muted" [routerLink]="['/live']">
+                Trackers
+              </a>
+            </li>
+            <li class="nav-item" (click)="resetTacker()">
+              <a class="nav-link text-muted">
+                Reset
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-muted" href="javascript:void(0)" (click)="updateTracker()">
+                <fa-icon [icon]="syncIcon"></fa-icon>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>-->
+  </div>
+</div>
+<div class="container mt-4">
+  <div class="card" style="display: none">
+    <div class="card-body">
+      DEV BUTTONS <br/>
+      <button class="btn btn-outline-primary" (click)="createTracker()">Create Tracker</button>
+      <button class="btn btn-outline-primary" (click)="updateTracker()">Update Tracker</button>
+      <button class="btn btn-outline-primary" (click)="deleteTracker()">Delete Tracker</button>
+      <button class="btn btn-outline-primary" (click)="getTotals()">Get Totals</button>
+      <button class="btn btn-outline-primary" (click)="logTracker()">Log Tracker</button>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-4">
+      <div class="card">
+        <ul class="list-group list-group-flush" *ngIf="tracker && tracker.length > 0">
+          <li class="list-group-item media p-2" *ngFor="let tracks of tracker">
+            <div class="row" *ngIf="tracks && tracks.user">
+              <div class="col-3">
+                <img class="mr-3 rounded d-inline-block align-top" [src]="tracks.user.imageURL"
+                     onError="this.src='assets/img/ubisoft.svg';"
+                     style="width: 100%"/>
+              </div>
+              <div class="col-9">
+                <a href="javascript:void(0)" [routerLink]="['/player', tracks.user.id, 'summary']"
+                   [innerHTML]="tracks.user.name"></a>
+                <small class="row mt-1"
+                       *ngIf="tracks.games && tracks.games.length > 0 && tracks.totals && tracks.totals.stats">
+                  <div class="col-6">
+                    <dl class="row tracker-dl">
+                      <dt class="col-6 text-uppercase text-muted">K</dt>
+                      <dl class="col-6" [innerHTML]="tracks.totals.stats.general.kills"></dl>
+                      <dt class="col-6 text-uppercase text-muted">D</dt>
+                      <dl class="col-6" [innerHTML]="tracks.totals.stats.general.deaths"></dl>
+                      <dt class="col-6 text-uppercase text-muted">A</dt>
+                      <dl class="col-6" [innerHTML]="tracks.totals.stats.general.assists"></dl>
+                      <dt class="col-6 text-uppercase text-muted">KDR</dt>
+                      <dl class="col-6"
+                          [innerHTML]="(tracks.totals.stats.general.kills / tracks.totals.stats.general.deaths).toFixed(2)"></dl>
+                    </dl>
+                  </div>
+                  <div class="col-6">
+                    <dl class="row tracker-dl">
+                      <dt class="col-6 text-uppercase text-muted">W</dt>
+                      <dl class="col-6" [innerHTML]="tracks.totals.stats.general.won"></dl>
+                      <dt class="col-6 text-uppercase text-muted">L</dt>
+                      <dl class="col-6" [innerHTML]="tracks.totals.stats.general.lost"></dl>
+                      <dt class="col-6 text-uppercase text-muted">W%</dt>
+                      <dl class="col-6"
+                          [innerHTML]="((tracks.totals.stats.general.won / tracks.totals.stats.general.played) * 100).toFixed(2)"></dl>
+                    </dl>
+                  </div>
+                </small>
+                <small class="text-muted d-block align-bottom" *ngIf="tracks.games && tracks.games.length <= 0">No games
+                  played during
+                  this session
+                </small>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-8">
+      <div class="card" *ngIf="data && data.length > 0">
+        <div class="card-header">
+          <div class="float-left">
+            <a class="text-muted" href="javascript:void(0)" (click)="resetTacker()">
+              Reset Tracker
+            </a>
+          </div>
+          <div class="float-right">
+            <a class="text-muted" href="javascript:void(0)" (click)="updateTracker()">
+              <fa-icon [icon]="syncIcon"></fa-icon>
+            </a>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="text-center mb-2">
+            <button class="btn btn-sm btn-primary" (click)="switchChartStat('kills')">Show Kills</button>
+            <button class="btn btn-sm btn-primary" (click)="switchChartStat('deaths')">Show Deaths</button>
+            <button class="btn btn-sm btn-primary" (click)="switchChartStat('assists')">Show Assists</button>
+            <button class="btn btn-sm btn-primary" (click)="switchChartStat('mmr', 'rank')">Show MMR Gain</button>
+          </div>
+          <h4 class="text-muted text-center">{{chartStat.charAt(0).toUpperCase() + chartStat.substr(1)}} per game</h4>
+          <ngx-charts-line-chart
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="data"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [legend]="showLegend"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel"
+            [autoScale]="autoScale"
+            [yAxisTickFormatting]="axisFormat"
+            [yScaleMin]="yScaleMin"
+            (select)="onSelect($event)">
+            <ng-template #tooltipTemplate let-model="model">
+              <h6 class="d-block mb-0" style="color: {{model.color}}">{{model.series}}</h6>
+              {{round(model.value) !== model.value ? model.value.toFixed(2) : model.value}}
+              {{chartStat.charAt(0).toUpperCase() + chartStat.substr(1)}}
+            </ng-template>
+
+          </ngx-charts-line-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

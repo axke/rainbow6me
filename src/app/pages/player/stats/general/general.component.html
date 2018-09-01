@@ -1,0 +1,33 @@
+<div class="card player-stats-general">
+  <div class="card-header">
+    <span class="m-0">General</span>
+  </div>
+  <div class="card-body">
+    <div class="row text-center">
+      <div class="col">
+        <app-stat [stat]="generalStats.won" statLabel="Wins"></app-stat>
+        <app-stat [stat]="generalStats.lost" statLabel="Losses"></app-stat>
+      </div>
+      <div class="col">
+        <app-stat [stat]="generalStats.kills" statLabel="Kills"></app-stat>
+        <app-stat [stat]="generalStats.deaths" statLabel="Deaths"></app-stat>
+      </div>
+      <div class="col">
+        <app-stat [stat]="generalStats.assists" statLabel="Assists"></app-stat>
+        <app-stat [stat]="generalStats.meleeKills" statLabel="Melee Kills"></app-stat>
+      </div>
+      <div class="col">
+        <app-stat [stat]="generalStats.dbno" statLabel="DBNO"></app-stat>
+        <app-stat [stat]="generalStats.headshot" statLabel="Headshots"></app-stat>
+      </div>
+      <div class="col">
+        <app-stat [stat]="((generalStats.won / generalStats.played) * 100).toFixed(2) + '%'" statLabel="Win %"></app-stat>
+        <app-stat [stat]="(generalStats.kills / generalStats.deaths).toFixed(2)" statLabel="K/D Ratio"></app-stat>
+      </div>
+      <div class="col">
+        <app-stat [stat]="((generalStats.headshot / generalStats.kills) * 100).toFixed(2) + '%'" statLabel="Headshot %"></app-stat>
+        <app-stat [stat]="(generalStats.timePlayed / 60 / 60).toFixed(0)" statLabel="Hours"></app-stat>
+      </div>
+    </div>
+  </div>
+</div>

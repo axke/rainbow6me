@@ -1,0 +1,59 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'variables';
+@import '../../../node_modules/bootstrap/scss/bootstrap';
+.alert {
+  border: none;
+  color: $white;
+
+  a,
+  .alert-link {
+    color: #fff;
+    text-decoration: underline;
+  }
+
+  @each $color, $value in $theme-colors {
+    &-#{$color} {
+      background-color: $value;
+    }
+  }
+}
+.card {
+  box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.75);
+  &.no-box-shadow {
+    box-shadow: none !important;
+  }
+  .card-header {
+    background-color: $gray-800;
+    span {
+      font-size: 1.3rem;
+      display: inline-block;
+    }
+  }
+}
+
+
+
+.player-stats-general {
+  .stat {
+    margin-bottom: .5rem;
+    span {
+      display: block;
+    }
+    small {
+      color: $gray-600;
+    }
+  }
+}
+body,html{
+  height:100%;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+a {
+  &:hover {
+    text-decoration: none;
+  }
+}

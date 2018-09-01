@@ -1,0 +1,34 @@
+<div class="player-header pb-3 pt-3 mb-5">
+  <div class="container">
+    <img class="rounded d-inline-block mr-5" height="146" width="146" [src]="player.user.imageURL" onError="this.src='assets/img/ubisoft.svg';" alt="Profile Avatar" />
+    <div class="player-header-info d-inline-block">
+      <h3 class="player-header-name-wrapper">
+        <span class="player-header-name" [innerHTML]="player.user.name"></span>
+        <span class="text-muted" [innerHTML]="player.user.platform"></span>
+      </h3>
+      <h5 class="text-muted" [innerHTML]="'Level ' + player.level.level"></h5>
+    </div>
+    <div class="player-header-tabs">
+      <ul class="nav justify-content-center">
+        <li class="nav-item">
+          <a class="nav-link text-muted" [routerLink]="['/player', player.user.id.toLowerCase(), 'summary']"
+             routerLinkActive="active">Summary</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-muted" [routerLink]="['/player', player.user.id.toLowerCase(), 'operators']"
+             routerLinkActive="active">Operators</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-muted" href="javascript:void(0)" (click)="refreshPlayer()">
+            <fa-icon [icon]="refreshIcon"></fa-icon>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="javascript:void(0)" [ngClass]="{'favorite': isFavorited, 'text-muted': !isFavorited}" (click)="favoriteUnfavorite()">
+            <fa-icon [icon]="starIcon"></fa-icon>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

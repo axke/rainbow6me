@@ -1,0 +1,26 @@
+<div class="container mt-5 results">
+  <div class="row">
+    <div class="col-sm-6 mx-auto">
+      <div class="input-group mb-3">
+        <input #user type="text" class="form-control border-secondary form-control-lg bg-secondary text-white"
+               placeholder="Search for a player..." [value]="name" (keyup.enter)="search(user.value)">
+        <div class="input-group-append">
+          <button class="btn btn-lg btn-primary" (click)="search(user.value)">Search</button>
+        </div>
+      </div>
+      <div class="card">
+        <ul class="list-group list-group-flush" *ngIf="users">
+          <li class="list-group-item media" *ngFor="let user of users">
+            <div class="w-100 pointer" [routerLink]="['/player', user.id, 'summary']">
+              <img class="mr-3 rounded d-inline-block align-top" [src]="user.imageURL" style="width: 64px" />
+              <div class="media-body d-inline-block" [routerLink]="['/player', user.id, 'summary']">
+                <h5 class="mt-0 mb-1" [innerHTML]="user.name"></h5>
+                <span class="d-block" [innerHTML]="'Platform: ' + user.platform"></span>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
