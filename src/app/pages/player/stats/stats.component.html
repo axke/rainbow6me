@@ -1,11 +1,19 @@
 <div class="container">
   <div class="row mt-4">
     <div class="col-sm-4">
-      <div>
-        <app-player-rank [rank]="player.rank" region="ncsa"></app-player-rank>
+      <div ngbDropdown>
+        <button class="btn btn-block btn-outline-primary" id="regionDropdown" ngbDropdownToggle>Region: {{region.toUpperCase()}}</button>
+        <div ngbDropdownMenu aria-labelledby="regionDropdown">
+          <button (click)="changeRegion('ncsa')" class="dropdown-item">NCSA</button>
+          <button (click)="changeRegion('emea')" class="dropdown-item">EMEA</button>
+          <button (click)="changeRegion('apac')" class="dropdown-item">APAC</button>
+        </div>
       </div>
       <div class="mt-4">
-        <app-previous-ranks [seasons]="seasons" region="ncsa"></app-previous-ranks>
+        <app-player-rank [rank]="player.rank" [region]="region"></app-player-rank>
+      </div>
+      <div class="mt-4">
+        <app-previous-ranks [seasons]="seasons" [region]="region"></app-previous-ranks>
       </div>
     </div>
     <div class="col-sm-8">
